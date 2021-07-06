@@ -5,7 +5,6 @@ module.exports = ( sequalize ) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        
+        },        
     })
 }
