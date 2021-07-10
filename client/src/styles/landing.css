@@ -1,0 +1,11 @@
+
+.background {
+    display: flex;
+    align-items: flex-end;
+    width:auto;
+    height: 800px;
+    background-size: cover;
+}
+div h1 {
+    color: red;
+}
