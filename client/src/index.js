@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PokeApp from './PokeApp'
 import { Provider } from 'react-redux';
+import { PokeApp } from './PokeApp';
 import { store } from './store/'
 
-import './index.css';
+import './index.css'
+
 
 
 ReactDOM.render(

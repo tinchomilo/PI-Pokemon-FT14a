@@ -1,9 +1,8 @@
-import { createStore } from 'redux';
-import { pokes } from '../reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from '../reducers';
+import thunk from 'redux-thunk';
 
-// imp reducer de la carpera reducer    
+const composeEnhancers = (typeof window !==  'undefined'  && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+  
 
-export const store = createStore( 
-    pokes, 
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+export const store = createStore( rootReducer, composeEnhancers( applyMiddleware( thunk ) ) );

@@ -1,0 +1,17 @@
+.card {
+    border: 1px solid black;
+    display: flex;
+    width: 250px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 5px;
+    background:darkgray;
+}
+
+.names {
+    color:red;
+    display: flex;
+    flex-direction: column;
+}
+

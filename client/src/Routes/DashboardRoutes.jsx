@@ -1,22 +1,26 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { Home } from '../components/home/Home'
-import { AddPokemon } from '../components/addPokemon/AddPokemon';
-import { Navbar } from '../components/nav/Navbar';
-import { SearchBar } from '../components/search/SearchBar';
+import { Route, Switch, Redirect } from 'react-router-dom'
+import { AddPokemon } from '../components/addPokemon/AddPokemon'
+import { PokemonDetail } from '../components/detail/PokemonDetail'
+import { GetPokemons } from '../components/getPokemons/GetPokemons'
+import { NavBar } from '../components/nav/NavBar'
 
-
-export const DashboardRoutes = () => {
+export const DashBoardRoutes = () => {
     return (
-        <div>
-            <Navbar />
+        <div className="conteiner">
+            <NavBar />
+            
             <div>
+                
                 <Switch>
-                     <Route exact path='/add' component={ AddPokemon } />
-                     <Route exact path='/search' component={ SearchBar } />
-                </Switch>
-            </div>           
+                    <Route exact path='/' component={ GetPokemons } />
+                    <Route exact path='/add' component={ AddPokemon } />
+                    <Route exact path='/pokemon/:pokemonId' component={ PokemonDetail } />
+                                        
+                    <Redirect to='/' />
 
-        </div>        
+                </Switch>
+            </div>
+        </div>
     )
 }

@@ -1,11 +1,14 @@
-import { AppRoute } from './Routes/AppRoute';
+import React from 'react'
+import { AppRouter } from './routes/AppRouter'
+
 import './App.css';
 
 
-function PokeApp() {
-  return (
-    < AppRoute />
-  );
-}
 
-export default PokeApp;
+export const PokeApp = () => {
+  return (
+    <div>
+     <AppRouter />
+    </div>
+  )
+}

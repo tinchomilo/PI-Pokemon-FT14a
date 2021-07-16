@@ -3,16 +3,15 @@ import { NavLink } from 'react-router-dom';
 
 import background from '../../images/landing1.jpeg';
 import pokebola from '../../images/pokebola.png'
-import '../../styles/landing.css';
+import '../../styles/landing.css'
 
-export const LandingPage = () => {
+export const LandingScreen = () => {
     return (
         <div className='background' style={{ backgroundImage: `url(${background})` }}>
-            <h1>componentte landing</h1>
+            <h1>landing page</h1>
             <NavLink to='/' >
-                <img id='pokebola' src={ pokebola } width="100" height="100" alt="" />            
+            < img className='pokebola' src={ pokebola } width="100" height="100" alt="" />
             </NavLink>
-            
         </div>
     )
 }

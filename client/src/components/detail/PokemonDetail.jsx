@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Home = () => {
+export const PokemonDetail = () => {
     return (
         <div>
-            <h1>HOME</h1>
+            detalles pokemon
         </div>
     )
 }

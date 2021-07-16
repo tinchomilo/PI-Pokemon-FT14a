@@ -1,13 +1,18 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
-export const Navbar = () => {
+import '../../styles/nav.css'
+import { Filters } from '../filters/Filters'
+
+export const NavBar = () => {
     return (
-        <nav>
-            <h1>nav</h1>
-            <NavLink to='/add' > Crear pokemon </NavLink>
-            <input type='text' name='buscar' placeholder='busca tu pokemnon'/>
-
+        <nav className='nav'>
+            <div className='grid'>
+                <NavLink exact to='/add' activeClassName='active'>Crear pokemon</NavLink> 
+                <NavLink exact to='/'>Home</NavLink>
+                
+                <Filters />
+            </div>
         </nav>
     )
 }

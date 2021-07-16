@@ -1,0 +1,4 @@
+export const GET_POKEMONS = 'GET_POKEMONS'
+export const ADD_POKEMON = 'ADD_POKEMON'
+export const GET_POKEMON_DETAIL = 'GET_POKEMON_DETAIL'
+export const USERS_ERROR = 'USERS_ERROR'
