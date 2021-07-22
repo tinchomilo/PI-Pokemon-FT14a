@@ -1,26 +1,28 @@
-import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import { AddPokemon } from '../components/addPokemon/AddPokemon'
-import { PokemonDetail } from '../components/detail/PokemonDetail'
-import { GetPokemons } from '../components/getPokemons/GetPokemons'
-import { NavBar } from '../components/nav/NavBar'
+// import React from 'react'
+// import { Route, Switch, Redirect } from 'react-router-dom'
+// import { AddPokemon } from '../components/addPokemon/AddPokemon'
+// import { PokemonDetail } from '../components/detail/PokemonDetail'
+// import { GetPokemons } from '../components/getPokemons/GetPokemons'
+// import { PokemonFinded } from '../components/getPokemons/PokemonFinded'
+// import { NavBar } from '../components/nav/NavBar'
 
-export const DashBoardRoutes = () => {
-    return (
-        <div className="conteiner">
-            <NavBar />
+// export const DashBoardRoutes = () => {
+//     return (
+//         <div className="conteiner">
+//             <NavBar />
             
-            <div>
+//             <div>
                 
-                <Switch>
-                    <Route exact path='/' component={ GetPokemons } />
-                    <Route exact path='/add' component={ AddPokemon } />
-                    <Route exact path='/pokemon/:pokemonId' component={ PokemonDetail } />
+//                 <Switch>
+//                     <Route path='/home' component={ GetPokemons } />
+//                     <Route path="/add" component={ AddPokemon } />
+//                     <Route path='/pokemon/:pokemonId' component={ PokemonDetail } />
+//                     <Route path='/finded' component={ PokemonFinded } />
                                         
-                    <Redirect to='/' />
+//                     <Redirect to='/home' />
 
-                </Switch>
-            </div>
-        </div>
-    )
-}
+//                 </Switch>
+//             </div>
+//         </div>
+//     )
+// }

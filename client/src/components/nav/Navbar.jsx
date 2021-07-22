@@ -8,8 +8,8 @@ export const NavBar = () => {
     return (
         <nav className='nav'>
             <div className='grid'>
-                <NavLink exact to='/add' activeClassName='active'>Crear pokemon</NavLink> 
-                <NavLink exact to='/'>Home</NavLink>
+                <NavLink exact to='/add' activeStyle={{ color: '#FFF9FB' }}>Crear pokemon</NavLink> 
+                <NavLink exact to='/home' activeStyle={{ color: '#FFF9FB' }}>Home</NavLink>
                 
                 <Filters />
             </div>

@@ -3,13 +3,13 @@ const { Tipo } = require( '../db' );
 const router  = require( 'express' ).Router();
 const axios = require( 'axios' );
 
-
 router.get( '/', async function( req, res ) {
     
-    try {
         const { name } = req.query    
-
-        if( name ){
+       
+    try {
+        if( name ) {
+            
             const pokesTable = await Pokemon.findOne({where: {name: name}})            
             if( pokesTable !== null ){ 
                 return res.json( pokesTable )                
@@ -32,25 +32,35 @@ router.get( '/', async function( req, res ) {
                 }                                      
            }
         }
-
-        const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20')
-        const response = data.results.map( ( elem ) => axios.get(elem.url))
-        const result = ( await Promise.all(response)).map( elem => { 
-            return {
-            name: elem.data.name,
-            id: elem.data.id,
-            health: elem.data.stats[0].base_stat,
-            strength: elem.data.stats[1].base_stat,
-            defence: elem.data.stats[2].base_stat,
-            speed: elem.data.stats[5].base_stat,
-            height: elem.data.height,
-            weight: elem.data.weight,
-            img: elem.data.sprites.other.dream_world.front_default,
-            type: elem.data.types.map( (elem) => elem.type.name),
-        }})
+        
+         let result = await axios
+            .get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=22")
+            .then((res) => {
+                return res.data.results
+            })
+            .then((results) => {
+                return Promise.all(results.map((res) => axios.get(res.url)))
+            })
+            .then((results) => {                
+                return results.map((res) => {
+                    return {
+                        name: res.data.name,
+                        id: res.data.id,
+                        img: res.data.sprites.other.dream_world.front_default,
+                        type: res.data.types.map( (elem) => elem.type.name),
+                    }
+                } )
+            } )
+       
         const pokemones = await Pokemon.findAll({ include: Tipo });
         const show = [...result, ...pokemones]
-        return res.json( show );
+        
+        let page = Number( req.query[0] ) || 0
+       
+        let from = page * 12;
+        let paginated = show.slice(from, from + 12)
+
+        return res.json( { page, paginated } );
 
     } catch ( error ) {
         return res.status(404).json( 'el pokemon es inexistente' )
@@ -66,15 +76,24 @@ router.get( '/:pokemonId', async function( req, res ) {
         const resultApi = { 
             name: data.name,
             type: data.types.map( ( elem ) => elem.type.name ),
-            img: data.sprites.other.dream_world.front_default            
+            img: data.sprites.other.dream_world.front_default,
+            id: data.id,
+            health: data.stats[0].base_stat,
+            strength: data.stats[1].base_stat,
+            defence: data.stats[2].base_stat,
+            speed: data.stats[5].base_stat,
+            height: data.height,
+            weight: data.weight
         }
             return res.json( resultApi );
     } else {
         const resultTable = await Pokemon.findOne( {
             where : {
                 id: pokemonId
-            }
+            },
+            include: Tipo 
         } );          
+        console.log(resultTable)
             return res.json( resultTable );
          }
     }

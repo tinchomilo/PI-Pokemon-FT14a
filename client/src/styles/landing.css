@@ -1,14 +1,28 @@
- 
+ html, body {
+	 height: 100%;
+	 margin: 0;
+ }
+
 .background {
     display: flex;
     align-items: flex-end;
-    width:auto;
-    height: 800px;
-    background-size: cover;
+	justify-content: center;
+    height: 760px;
+	width: 100%;    
+    background-size: cover; 
+	/* background round */
+
 }
-div h1 {
-    color: red;
+
+.intro {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: #282b36;
+	font-style: italic;
 }
+
 /*
 .imagen:hover { */
     /* -webkit-transform: rotate(-720deg);

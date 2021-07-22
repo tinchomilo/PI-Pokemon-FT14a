@@ -1,39 +1,80 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {useDispatch, useSelector } from 'react-redux'
+import { filter_type } from '../../actions/filerByType'
+import { sort_desc } from '../../actions/sort_desc'
+
 import '../../styles/filters.css'
 
 export const Filters = () => {
+
+    const dispatch = useDispatch()
+    const pokemonTypes = useSelector(state => state.pokemonTypes)
+    const pokemons = useSelector(state => state.pokemonsLoaded)
+    
+    let {paginated} = pokemons
+    // console.log('paginated',paginated)    
+    
+    const [ordered, setOrdered] = useState(paginated)
+    // console.log('ordered', ordered)
+
+    const [typeActive, setTypeActive] = useState('')
+    const [pokesFiltered, setPokesFiltered] = useState([])
+    const [valueActive, setValueActive] = useState('')    
+
+    const handleChange = ( e ) => {
+        
+        setValueActive( e.target.value )
+        if( valueActive === 'ascendente')
+            ordered.sort((a, b) => {
+                if( a.name < b.name ) return 1;
+                if( a.name > b.name ) return -1;
+                return 0;
+            })
+
+        if( valueActive === 'descendente')
+        ordered.sort((a, b) => {
+            if( a.name < b.name ) return -1;
+            if( a.name > b.name ) return 1;
+            return 0;
+        })
+        console.log('////', ordered)
+        setOrdered( ordered )
+        dispatch(sort_desc( ordered ) )
+    }
+
+
+    const handleTypeChange = ( e ) => {
+        setTypeActive( e.target.value )
+        setPokesFiltered( paginated.filter( (poke) => poke.type === typeActive))
+        dispatch( filter_type( pokesFiltered) )
+    }
+
+
     return (
-        <div>
-            <label className="orden">
+        <div className='filter'>
+            <label>
                     orden  
-                        <select>
+                        <select 
+                        className='orden'
+                        value={ valueActive }
+                        onChange={ handleChange }
+                        >
                             <option value="ascendente">Ascendente</option>
                             <option value="descendente">Descendente</option>
                         </select>
                 </label>
                 <label>
                     tipo  
-                    <select>
-                        <option value="normal">Normal</option>
-                        <option value="lucha">Lucha</option>
-                        <option value="volador">Volador</option>
-                        <option value="veneno">Veneno</option>
-                        <option value="tierra">Tierra</option>
-                        <option value="roca">Roca</option>
-                        <option value="bicho">Bicho</option>
-                        <option value="fantasma">Fantasma</option>
-                        <option value="acero">Acero</option>
-                        <option value="fuego">Fuego</option>
-                        <option value="agua">Agua</option>
-                        <option value="planta">Planta</option>
-                        <option value="electrico">Electrico</option>
-                        <option value="siquico">Siquico</option>
-                        <option value="hielo">Hielo</option>
-                        <option value="dragon">Dragon</option>
-                        <option value="oscuro">Oscuro</option>
-                        <option value="hada">Hada</option>
-                        <option value="desconocido">Desconocido</option>
-                        <option value="sombra">Sombra</option>
+                    <select 
+                        className='tipo'
+                        value={ typeActive }
+                        onChange={ handleTypeChange }
+                        >
+                        {
+                            pokemonTypes.map( (type) => (
+                                <option key={type.id} value={type.name}>{type.name}</option>
+                            ))
+                        }                         
                     </select>
                 </label>
         </div>
